@@ -33,8 +33,8 @@ if [ "$ELAPSED" -gt 300 ]; then
 
   fi
 
+  chmod +x updated_$FILENAME
   mv $FILENAME deleted_$FILENAME
   mv updated_$FILENAME $FILENAME
-  chmod +x $FILENAME
 
 fi
