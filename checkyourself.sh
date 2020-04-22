@@ -1,5 +1,5 @@
 #!/usr/local/bin/bash
-#test112www
+
 FILENAME=$(basename $0)
 
 PREVIOUS_COMMIT=$(tail -3 $FILENAME | grep $FILENAME | grep ^#commit | awk -F'=' '{ print $2}')
@@ -35,5 +35,6 @@ if [ "$ELAPSED" -gt 300 ]; then
 
   mv $FILENAME deleted_$FILENAME
   mv updated_$FILENAME $FILENAME
+  chmod +x $FILENAME
 
 fi
