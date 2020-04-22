@@ -42,5 +42,3 @@ function checkForUpdates {
 
   fi
 }
-
-checkForUpdates "$0"
