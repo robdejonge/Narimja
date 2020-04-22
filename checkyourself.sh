@@ -1,5 +1,5 @@
 #!/usr/local/bin/bash
-#dus
+#duslll
 FILENAME=$(basename $0)
 
 PREVIOUS_COMMIT=$(tail -3 $FILENAME | grep $FILENAME | grep ^#commit | awk -F'=' '{ print $2}')
