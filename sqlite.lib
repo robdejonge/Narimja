@@ -1,0 +1,137 @@
+#!/bin/bash
+#
+# sqlitelib
+
+function dbquery() {
+
+	local database=$1
+	local query=$2
+
+	if [ ! -e $database ]; then die "database does not exist"; fi 
+
+	sqlite3 $options $database "$query"
+
+}
+
+# ----------------------------------------------------------------------------
+
+function getValue () {
+	
+	case $# in 
+
+		2)
+			local database=$DEFAULT_DB
+			local table=$1
+			local key=$2
+
+			;;
+		3) 
+			local database=$1
+			local table=$2
+			local key=$3
+			;;
+		*)
+			print_debug "incorrect number of parameters passed to $FUNCNAME(): $@"
+			;;
+
+	esac
+
+	dbquery $database "SELECT value FROM $table WHERE key = '$key'"
+
+}
+
+# ----------------------------------------------------------------------------
+
+function setValue () {
+	
+	case $# in 
+
+		3)
+			local database=$DEFAULT_DB
+			local table=$1
+			local key=$2
+			local value=$3
+
+			;;
+		4) 
+			local database=$1
+			local table=$2
+			local key=$3
+			local value=$4
+			;;
+		*)
+			print_debug "incorrect number of parameters passed to $FUNCNAME()"
+			;;
+
+	esac
+
+
+	dbquery $database "UPDATE $table SET value = '$value' WHERE key = '$key'"
+
+}
+
+# ----------------------------------------------------------------------------
+
+function setValueForced () {
+
+	case $# in 
+
+		3)
+			local database=$DEFAULT_DB
+			local table=$1
+			local key=$2
+			local value=$3
+
+			;;
+		4) 
+			local database=$1
+			local table=$2
+			local key=$3
+			local value=$4
+			;;
+		*)
+			print_debug "incorrect number of parameters passed to $FUNCNAME()"
+			;;
+
+	esac
+
+	dbquery $DEFAULT_DB "INSERT OR REPLACE INTO $table (key, value) VALUES ('$key', '$value')"
+
+}
+
+# ----------------------------------------------------------------------------
+
+function createKey () {
+
+	
+	case $# in 
+
+		2)
+			local database=$DEFAULT_DB
+			local table=$1
+			local key=$2
+
+			;;
+		3) 
+			local database=$1
+			local table=$2
+			local key=$3
+			;;
+		*)
+			print_debug "incorrect number of parameters passed to $FUNCNAME()"
+			;;
+
+	esac
+
+	dbquery $database "INSERT INTO $table (key) VALUES ('$key')"
+
+}
+
+# ----------------------------------------------------------------------------
+
+function getLatestWANIP () {
+
+
+	dbquery $DEFAULT_DB "SELECT ipv4_address FROM data_wanip ORDER BY posix_time DESC LIMIT 1"
+
+}
