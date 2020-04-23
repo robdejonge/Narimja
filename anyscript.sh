@@ -1,4 +1,4 @@
 #!/usr/local/bin/bash
-#changed againxx
-source ./checkyourself.sh
+
+source ./checkforupdates.sh
 checkForUpdates "$0"
