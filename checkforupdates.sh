@@ -1,5 +1,7 @@
 #!/usr/local/bin/bash
 
+# UPDATE THE REPOSITORY URLS!
+
 function checkForUpdates {
 
   PARAMETER=$(realpath $1)
