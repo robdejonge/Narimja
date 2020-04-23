@@ -1,5 +1,5 @@
 #!/usr/local/bin/bash
-#test
+#testee
 echo loading the function
 source ./checkyourself.sh
 echo function loaded
