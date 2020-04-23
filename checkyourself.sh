@@ -24,7 +24,7 @@ function checkForUpdates {
 
     echo "$FILENAME: checking for new commits"
 
-    COMMITS_JSON=$(curl -s -H "Cache-Control: no-cache" "https://api.github.com/repos/robdejonge/Narimja/commits?path=$FILENAME&since=$PREVIOUS_COMMIT")
+    COMMITS_JSON=$(curl -s "https://api.github.com/repos/robdejonge/Narimja/commits?path=$FILENAME&since=$PREVIOUS_COMMIT")
     COMMIT_COUNT=$(echo $COMMITS_JSON | jq  '. | length')
     LAST_COMMIT=$(echo $COMMITS_JSON | jq '.[0]["commit"]["committer"]["date"]' | tr -d '"')
     LAST_CHECK=$(date +"%Y-%m-%dT%H:%M:%SZ")
@@ -37,7 +37,7 @@ function checkForUpdates {
       echo "$FILENAME: downloading, marking as last checked at $LAST_CHECK"
 
       # if there are new commits, download the latest and append the latest commit and check timestamps
-      curl -s -H "Cache-Control: no-cache" -o $FILEPATH/updated_$FILENAME "https://raw.githubusercontent.com/robdejonge/Narimja/master/$FILENAME"
+      curl -s -o $FILEPATH/updated_$FILENAME "https://raw.githubusercontent.com/robdejonge/Narimja/master/$FILENAME?$(date +%s)"
       echo " " >>$FILEPATH/updated_$FILENAME
       echo "#-------" >>$FILEPATH/updated_$FILENAME
       echo "#commit($FILENAME)=$LAST_COMMIT" >>$FILEPATH/updated_$FILENAME
