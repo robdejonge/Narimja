@@ -67,4 +67,4 @@ function checkForUpdates {
   fi
 }
 
-checkForUpdates "checkyourself.sh"
+checkForUpdates "${BASH_SOURCE[0]}"
