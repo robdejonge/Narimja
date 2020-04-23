@@ -49,7 +49,7 @@ function checkForUpdates {
       echo "$FILENAME: no new commit found, updating last checked to $LAST_CHECK"
 
       # if there are no new commits, update the latest check timestamp
-      NROFLINESTOCOPY=$(expr $(wc -l $FILENAME | awk '{print $1}') - 1 )
+      NROFLINESTOCOPY=$(expr $(wc -l $FILEPATH/$FILENAME | awk '{print $1}') - 1 )
       head -n$NROFLINESTOCOPY $FILEPATH/$FILENAME >$FILEPATH/updated_$FILENAME
       echo "#check($FILENAME)=$LAST_CHECK" >>$FILEPATH/updated_$FILENAME
 
