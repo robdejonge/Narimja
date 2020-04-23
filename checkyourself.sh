@@ -33,7 +33,7 @@ function checkForUpdates {
 
     if [ $COMMIT_COUNT -gt 1 ]; then
 
-      echo "$FILENAME: new commit found at $LAST_COMMIT"
+      echo "$FILENAME: latest commit found at $LAST_COMMIT"
       echo "$FILENAME: downloading, marking as last checked at $LAST_CHECK"
 
       # if there are new commits, download the latest and append the latest commit and check timestamps
